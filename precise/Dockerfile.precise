@@ -1,0 +1,14 @@
+FROM stackbrew/ubuntu:12.04
+
+RUN sh -c "echo 'deb http://security.ubuntu.com/ubuntu precise-security main restricted universe multiverse' >> /etc/apt/sources.list"
+RUN sh -c "echo 'deb http://us.archive.ubuntu.com/ubuntu precise main restricted universe multiverse' >> /etc/apt/sources.list"
+RUN sh -c "echo 'deb http://us.archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse' >> /etc/apt/sources.list"
+RUN sh -c "echo 'deb http://us.archive.ubuntu.com/ubuntu precise-backports main restricted universe multiverse' >> /etc/apt/sources.list"
+RUN apt-get update && apt-get -y dist-upgrade && apt-get -y install build-essential dpkg-dev git cdbs debhelper po-debconf pyflakes pylint python python-argparse python-cheetah python-configobj python-jsonpatch python-mocker python-nose python-oauth python-prettytable python-setuptools python-requests python-yaml
+RUN mkdir /build
+WORKDIR /build
+RUN git clone https://github.com/jayofdoom/cloud-init-debian-pkg
+WORKDIR cloud-init-debian-pkg 
+RUN dpkg-buildpackage -b
+WORKDIR /build
+RUN rm -rf cloud-init-debian-pkg
