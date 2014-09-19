@@ -6,10 +6,12 @@ Build cloud-init for supported distros with docker scripts + makefiles.
 Usage
 -----
 
-`# required: linux install with internet and recent-ish docker installed
+```bash
+# required: linux install with internet and recent-ish docker installed
 git clone https://github.com/jayofdoom/cloud-init-docker-build
 cd cloud-init-docker-build/$distro
-make`
+make
+```
 
 TODO
 ----
