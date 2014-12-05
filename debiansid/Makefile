@@ -4,7 +4,7 @@ CONTAINER_UUID := $(shell uuidgen)
 default: docker
 
 docker:
-	cat Dockerfile.debiansid | docker build -t "$(IMAGE_UUID)" -
+	cat Dockerfile.debiansid | docker build --no-cache -t "$(IMAGE_UUID)" -
 	docker run --name="$(CONTAINER_UUID)" "$(IMAGE_UUID)" /bin/bash
 	docker cp $(CONTAINER_UUID):/build/ .
 
